@@ -2,15 +2,15 @@ from sys import exit
 from textwrap import dedent
 
 
-class Scene():
+class Scene:
 
-    def enter(self):
-        print('Эта сцена еще не настроена.')
-        print('Создайте подкласс и реализуйте функцию enter().')
+    @staticmethod
+    def enter():
+        print('Технические неполадки.')
         exit(1)
 
 
-class Engine():
+class Engine:
 
     def __init__(self, scene_map):
         self.scene_map = scene_map
@@ -25,16 +25,19 @@ class Engine():
 
         current_scene.enter()
 
-class Death(Scene):
 
-    def enter(self):
+class Death:
+
+    @staticmethod
+    def enter():
         print("Печально")
         exit(1)
 
 
-class House(Scene):
+class House:
 
-    def enter(self):
+    @staticmethod
+    def enter():
         print(dedent("""
             ...Вы очнулись. Смотря вокруг вы видите неразборчивый хаос.
             Все то ли бегут, то ли дерутся. Пытаясь сфокусироваться Вы видите как на Вас
@@ -66,9 +69,11 @@ class House(Scene):
             print("Выбирете цифру!")
             return 'house'
 
-class Tunel(Scene):
 
-    def enter(self):
+class Tunel:
+
+    @staticmethod
+    def enter():
         print(dedent("""
             ...стараясь вспомнить куда Вы напрявлялись, вспоминате что
             друг Вам рассказывал за готовящиеся к отлету ракеты, и что он будет Вас ждать
@@ -113,9 +118,11 @@ class Tunel(Scene):
             print("Выбирете чилсло!")
             return 'tunel'
 
-class Kosmodrom(Scene):
 
-    def enter(self):
+class Kosmodrom:
+
+    @staticmethod
+    def enter():
         print(dedent("""
             Прибыв на космодром вы встречаете своего друга.
             Он говорит вам что есть четыре ракеты. Вы приходите ко мнению что их готовили
@@ -158,27 +165,32 @@ class Kosmodrom(Scene):
             return 'kino'
 
 
-class USSR(Scene):
+class USSR:
 
-    def enter(self):
+    @staticmethod
+    def enter():
         print(dedent("""
             Вы прилетели на планету СССР.
             Но она уже развалилась.
             """))
         return 'death'
 
-class Pukan(Scene):
 
-    def enter(self):
+class Pukan:
+
+    @staticmethod
+    def enter():
         print(dedent("""
             Вы прилетели на планету Пукан.
             И сгорели.
             """))
         return 'death'
 
-class Klaif(Scene):
 
-    def enter(self):
+class Klaif:
+
+    @staticmethod
+    def enter():
         print(dedent("""
             Вы прилетели на планету Клайф.
             Что бы выжить нужно где-то жить или что-то есть. 
@@ -211,9 +223,10 @@ class Klaif(Scene):
             return 'klaif'
 
 
-class Kino(Scene):
+class Kino:
 
-    def enter(self):
+    @staticmethod
+    def enter():
         print(dedent("""
             Вы прилетели на планету Кино.
             На планете окозалось неизвестное Вам животное.
@@ -249,9 +262,11 @@ class Kino(Scene):
                 print("Выбирите какой то вариант.")
                 return 'kino'
 
-class Beseda(object):
 
-    def enter(self):
+class Beseda:
+
+    @staticmethod
+    def enter():
         print("Зверь смотрит на Вас.\nИ спрашивает.\n- 'Каков смысл жизни?'")
 
         choice = input("> ")
@@ -267,26 +282,28 @@ class Beseda(object):
         else:
             print("Введите ответ.")
 
-class The_end(Scene):
 
-    def enter(self):
+class TheEnd:
+
+    @staticmethod
+    def enter():
         print("Вы благополучно сбежали с планеты!")
         return 'finish'
 
 
-class Map(object):
+class Map:
     
     scenes = {
-        'house': House(),
-        'tunel': Tunel(),
-        'kosmodrom': Kosmodrom(),
-        'ussr': USSR(),
-        'pukan': Pukan(),
-        'klaif': Klaif(),
-        'kino': Kino(),
-        'death': Death(),
-        'finish': The_end(),
-        'beseda': Beseda(),
+        'house': House,
+        'tunel': Tunel,
+        'kosmodrom': Kosmodrom,
+        'ussr': USSR,
+        'pukan': Pukan,
+        'klaif': Klaif,
+        'kino': Kino,
+        'death': Death,
+        'finish': The_end,
+        'beseda': Beseda,
     }
 
     def __init__(self, start_scene):
@@ -298,6 +315,7 @@ class Map(object):
 
     def opening_scene(self):
         return self.next_scene(self.start_scene)
+
 
 a_map = Map('house')
 a_game = Engine(a_map)
