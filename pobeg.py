@@ -320,3 +320,5 @@ class Map:
 a_map = Map('house')
 a_game = Engine(a_map)
 a_game.play()
+
+# Коментарий
