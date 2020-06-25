@@ -131,7 +131,8 @@ class Kosmodrom:
             1.СССР.
             2.Пукан.
             3.Клайф.
-            4.Кино
+            4.Кино.
+            5.Огас.
             """))
 
         action = input("> ")
@@ -163,6 +164,13 @@ class Kosmodrom:
                 Вы отправляетесь на планету Кино!
                 """))
             return 'kino'
+
+        elif action == "5":
+            print(dedent("""
+                Вы направляетесь к ракете, попутно одевая и собирая то что нужно.
+                Вы отправляетесь на планету Огас!
+                """))
+            return 'ogas'
 
 
 class USSR:
@@ -263,6 +271,14 @@ class Kino:
                 return 'kino'
 
 
+class Ogas:
+
+    @staticmethod
+    def enter():
+        print(dedent("Что то происходит."))
+        return 'death'
+
+
 class Beseda:
 
     @staticmethod
@@ -302,8 +318,9 @@ class Map:
         'klaif': Klaif,
         'kino': Kino,
         'death': Death,
-        'finish': The_end,
+        'finish': TheEnd,
         'beseda': Beseda,
+        'ogas': Ogas,
     }
 
     def __init__(self, start_scene):
